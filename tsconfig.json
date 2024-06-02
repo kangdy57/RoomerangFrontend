@@ -20,5 +20,14 @@
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false
-  }
+  },
+
+  "include": [
+    "src/**/*.ts", // Standardpfad für TypeScript-Dateien
+    "src/environments/**/*.ts" // Hinzugefügter Pfad für Umgebungsdateien
+  ],
+  "exclude": [
+    "node_modules" // Andere Verzeichnisse, die ausgeschlossen werden sollen
+  ]
+
 }

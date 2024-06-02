@@ -18,7 +18,7 @@ export class NoteComponent implements OnInit {
   }
 
   fetchNote(): void {
-    this.http.get<Note[]>('http://localhost:8080/roomerang/findAllNotes')
+    this.http.get<Note[]>('http://localhost:8080/roomerang/allNotes')
       .subscribe(data => {
         this.notes = data;
       }, error => {

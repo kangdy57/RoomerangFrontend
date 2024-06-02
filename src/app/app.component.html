@@ -2,5 +2,9 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
+  <div *ngFor ="let wohngemeinschaft of wohngemeinschaften">
+<div>{{wohngemeinschaft.notes}}</div>
+
+  </div>
 </div>
 <app-note></app-note>
