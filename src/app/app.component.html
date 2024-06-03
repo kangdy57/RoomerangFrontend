@@ -2,9 +2,101 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <div *ngFor ="let wohngemeinschaft of wohngemeinschaften">
-<div>{{wohngemeinschaft.notes}}</div>
+  
 
+  <div>{{wohngemeinschaft.name}}</div></div>
+
+
+  <div *ngIf ="wohngemeinschaft">
+    
+      
+      <div class="note-container_neu">
+        <h2>Notes</h2>
+        <div class="note-grid">
+          <div *ngFor="let note of wohngemeinschaft.notes" class="note-card">
+            <h3 class="note-title">{{ note.author.name }}: </h3>
+            
+            <p class="note-content">{{ note.text }}</p>
+            <div class="note-actions">
+              <button (click)="editNote(note)">Edit</button>
+              <button (click)="deleteNote(note.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+        
+      
+        <!--<button (click)="addNote()">Add New Note</button>-->
+
+        
+<!-- Button trigger modal 
+<div><button type="button" class="btn-primary" (click)="openModal()">
+  Notiz hinzufügen
+</button></div>-->
+
+<div class="container"  id="main-container"><button type="button" class="btn-primary" (click)="onOpenModal(null, 'add')">
+  Notiz hinzufügen
+</button></div>
+
+
+<!-- Modal  -->
+<div class="modal" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Notiz</h5>
+        <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <div>
+            <label for="noteTitle">Roommate:</label><br>
+            <input type="text" id="noteTitle" name="noteTitle" style="width: 100%; margin-bottom: 10px;"><br>
+            <label for="noteContent">Content:</label><br>
+            <textarea id="noteContent" name="noteContent" style="width: 100%; height: 200px;"></textarea>
+          </div>
+          
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+        <button type="button" class="btn btn-primary"(click)="closeModal()">Add</button>
+      </div>
+    </div>
   </div>
-</div>
+</div> 
+
+
+
+
+
+
+
+
 <app-note></app-note>
+      
+      
+      
+      <!-- Modal 
+      <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="modal-title" id="deleteModelLabel">Delete Employee</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+                 </button>
+              </div>
+              <div class="modal-body">
+                 <p>Are you sure you want to delete employee ?</p>
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+      </div>-->
