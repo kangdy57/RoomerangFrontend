@@ -33,9 +33,10 @@
   Notiz hinzufügen
 </button></div>-->
 
-<div class="container"  id="main-container"><button type="button" class="btn-primary" (click)="onOpenModal(null, 'add')">
+<div class="container"  id="main-container"><button type="button" class="btn-primary" (click)="  openModal()">
   Notiz hinzufügen
 </button></div>
+
 
 
 <!-- Modal  -->
@@ -49,20 +50,22 @@
         </button>
       </div>
       <div class="modal-body">
+        <!--<form #addForm="ngForm" (ngSubmit)="onAddNote()">-->
+          
         <div class="modal-body">
           <div>
             <label for="noteTitle">Roommate:</label><br>
-            <input type="text" id="noteTitle" name="noteTitle" style="width: 100%; margin-bottom: 10px;"><br>
+            <input type="text" id="noteAuthor" [(ngModel)]="name" name="name" style="width: 100%; margin-bottom: 10px;"><br>
             <label for="noteContent">Content:</label><br>
-            <textarea id="noteContent" name="noteContent" style="width: 100%; height: 200px;"></textarea>
+            <textarea id="noteContent"[(ngModel)]="text" name="text" style="width: 100%; height: 200px;"></textarea>
           </div>
           
         </div>
-        
+      
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-        <button type="button" class="btn btn-primary"(click)="closeModal()">Add</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal();onAddNote()">Add</button>
       </div>
     </div>
   </div>

@@ -6,6 +6,8 @@ import { NoteComponent } from './note/note.component';
 import { RoomMateComponent } from './room-mate/room-mate.component';
 import { WgServiceComponent } from './wg-service/wg-service.component';
 import { WohngemeinschaftComponent } from './wohngemeinschaft/wohngemeinschaft.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { WohngemeinschaftComponent } from './wohngemeinschaft/wohngemeinschaft.c
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

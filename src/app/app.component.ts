@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Note, Wohngemeinschaft } from './models/notes';
 import { wohngemeinschaftService } from './wohngemeinschaft/wohngemeinschaft.service';
 import * as $ from 'jquery';
+import { NgForm } from '@angular/forms';
 
 //declare var $: any;
 @Component({
@@ -13,6 +14,8 @@ import * as $ from 'jquery';
 })
 export class AppComponent implements OnInit{
   public wohngemeinschaft: Wohngemeinschaft;
+  name: string = '';
+  text: string = '';
 
   constructor(private wohngemeinschaftservice: wohngemeinschaftService){}
 
@@ -32,6 +35,31 @@ export class AppComponent implements OnInit{
       }
     );
   }
+
+
+
+public onAddNote(): void {
+  if (this.name && this.text) {
+    this.wohngemeinschaftservice.addNotiz(this.name, this.text).subscribe(
+      (response: any) => {
+        this.name = ''; // Reset the author input
+        this.text = ''; // Reset the content input
+        this.closeModal(); // Close the modal after adding the note
+        this.getWohngemeinschaft();
+      },
+      (error) => {
+        console.error('Error adding note:', error);
+      }
+    );
+  } else {
+    alert('Please fill in both fields.');
+  }
+  
+  
+}
+
+
+
 
   // modal.component.ts
 

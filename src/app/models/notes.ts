@@ -1,9 +1,6 @@
 export interface Note {
-    id: string,
-    text: string,
-    parentNote: string,
-    wohngemeinschaft: Wohngemeinschaft
-    notes: [],
+    authorName:string;
+    textContent:string;
   }
   export interface RoomMate {
     name: string,
@@ -12,5 +9,5 @@ export interface Note {
   export interface Wohngemeinschaft{
     name: string,
     roommates: RoomMate[],
-    notes: string
+    notes: Note[]
   }
