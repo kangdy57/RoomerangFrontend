@@ -4,9 +4,10 @@ import { HttpClientModule } from  '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NoteComponent } from './note/note.component';
 import { RoomMateComponent } from './room-mate/room-mate.component';
-import { WgServiceComponent } from './wg-service/wg-service.component';
 import { WohngemeinschaftComponent } from './wohngemeinschaft/wohngemeinschaft.component';
 import { FormsModule } from '@angular/forms';
+import { WohngemeinschaftService } from './wohngemeinschaft/wohngemeinschaft.service';
+
 
 
 @NgModule({
@@ -14,7 +15,6 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     NoteComponent,
     RoomMateComponent,
-    WgServiceComponent,
     WohngemeinschaftComponent
   ],
   imports: [
@@ -22,7 +22,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [WohngemeinschaftService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
