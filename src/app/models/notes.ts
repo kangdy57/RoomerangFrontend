@@ -1,6 +1,7 @@
 export interface Note {
-    authorName:string;
-    textContent:string;
+    author:RoomMate;
+    text:string;
+    id:any
   }
   export interface RoomMate {
     name: string,

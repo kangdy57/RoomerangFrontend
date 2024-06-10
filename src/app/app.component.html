@@ -1,6 +1,7 @@
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
+    
   </h1>
   
 
@@ -18,12 +19,17 @@
             
             <p class="note-content">{{ note.text }}</p>
             <div class="note-actions">
-              <button (click)="editNote(note)">Edit</button>
+              <button (click)="openModalEdit(note,note.text)">Edit</button>
               <button (click)="deleteNote(note.id)">Delete</button>
             </div>
           </div>
         </div>
-        
+        <div class="container"  id="main-container"><button type="button" class="btn-primary" (click)="  openModal('myModal')">
+          Notiz hinzufügen
+        </button></div>
+      </div>
+    
+    </div>
       
         <!--<button (click)="addNote()">Add New Note</button>-->
 
@@ -33,24 +39,29 @@
   Notiz hinzufügen
 </button></div>-->
 
-<div class="container"  id="main-container"><button type="button" class="btn-primary" (click)="  openModal()">
-  Notiz hinzufügen
-</button></div>
 
 
 
-<!-- Modal  -->
+
+
+
+
+
+
+
+
+<!-- add NotizModal  -->
 <div class="modal" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Notiz</h5>
-        <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+        <button type="button" class="close" (click)="closeModal('myModal')" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <!--<form #addForm="ngForm" (ngSubmit)="onAddNote()">-->
+        
           
         <div class="modal-body">
           <div>
@@ -64,12 +75,44 @@
       
       </div>
       <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-        <button type= "submit" class="btn btn-primary"(click)="closeModal();onAddNote()">Add</button>
+       <button type="button" class="btn btn-secondary" (click)="closeModal('myModal')">Close</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('myModal');onAddNote()">Add</button>
       </div>
     </div>
   </div>
 </div> 
+
+
+<!-- Edit Note Modal -->
+<div class="modal" id="editNoteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="editNoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editNoteModalLabel">Notiz bearbeiten</h5>
+         <button type="button" class="close" (click)="closeModal('editNoteModal')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <div class="modal-body">
+        
+          <div>
+            <label for="editNoteAuthor">Roommate:</label><br>
+            <p>{{selectednote?.author?.name}}</p>
+            <label for="editNoteContent">Content:</label><br>
+          <textarea id="editNoteContent" [(ngModel)]="updatetext" name="updatetext" class="form-control" style="width: 100%; height: 200px;"></textarea>
+          <!--  <textarea id="editNoteContent" [(ngModel)]="selectednote?.text" name="updatetext" class="form-control" style="width: 100%; height: 200px;"></textarea>-->
+
+          </div>
+    
+      </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal('editNoteModal')">Close</button>
+        <button type="submit" class="btn btn-primary" (click)="closeModal('editNoteModal');editNote()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 

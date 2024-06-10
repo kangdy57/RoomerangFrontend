@@ -30,6 +30,16 @@ export class wohngemeinschaftService{
         return this.http.post<string>(`${this.apiServerUrl}/roomerang/addNote`, formData);
     }
 
+    public editNote(id:any, text:string): Observable<any>{
+        const formData = new FormData();
+        formData.append('noteId', id);
+        formData.append('text', text);
+        return this.http.post<string>(`${this.apiServerUrl}/roomerang/editNote`, formData);
+    }
+
+    
+
+
 
     public updateWohngemeinschaft(wohngemeinschaft:Wohngemeinschaft): Observable<Wohngemeinschaft>{
         return this.http.post<Wohngemeinschaft>(`${this.apiServerUrl}/updateWG`, wohngemeinschaft)

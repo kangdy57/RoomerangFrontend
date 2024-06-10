@@ -16,6 +16,9 @@ export class AppComponent implements OnInit{
   public wohngemeinschaft: Wohngemeinschaft;
   name: string = '';
   text: string = '';
+  updatetext:string='hallo';
+  id:any;
+  selectednote:Note = { id: 0, author: { wohngemeinschaft:{name:'',notes:[],roommates:[]},name: '' }, text: '' };
 
   constructor(private wohngemeinschaftservice: wohngemeinschaftService){}
 
@@ -27,6 +30,7 @@ export class AppComponent implements OnInit{
   public getWohngemeinschaft(): void{
     this.wohngemeinschaftservice.getWohngemeinschaft().subscribe(
       (response: Wohngemeinschaft)=>{
+        this.selectednote=null;
         this.wohngemeinschaft=response;
         console.log(this.wohngemeinschaft);
       },
@@ -44,7 +48,7 @@ public onAddNote(): void {
       (response: any) => {
         this.name = ''; // Reset the author input
         this.text = ''; // Reset the content input
-        this.closeModal(); // Close the modal after adding the note
+        this.closeModal('myModal'); // Close the modal after adding the note
         this.getWohngemeinschaft();
       },
       (error) => {
@@ -69,6 +73,20 @@ public deleteNote(id:any):void{
       }
     );
     
+
+}
+
+public editNote():void{
+  
+  this.wohngemeinschaftservice.editNote(this.selectednote.id,this.updatetext).subscribe(
+    (response: any) => {
+      this.getWohngemeinschaft();
+    },
+    (error) => {
+      console.error('Error editing note:', error);
+    }
+  );
+  
 
 }
 
@@ -109,18 +127,33 @@ public deleteNote(id:any):void{
 
 
   
-   openModal() {
+   openModal(text:string) {
     
-    const modalElement = document.getElementById('myModal');
-  if (modalElement) {
+    const modalElement = document.getElementById(text);
+  if (modalElement&& !modalElement.classList.contains('show')) {
     modalElement.classList.add('show');
     modalElement.style.display = 'block';
+    modalElement.setAttribute('aria-hidden', 'false');
+      modalElement.setAttribute('aria-modal', 'true');
   }
   }
 
-    closeModal() {
+  openModalEdit(note:Note, text:string) {
+    this.updatetext=text;
+    this.selectednote=note;
+    
+    const modalElement = document.getElementById('editNoteModal');
+  if (modalElement&& !modalElement.classList.contains('show')) {
+    modalElement.classList.add('show');
+    modalElement.style.display = 'block';
+    modalElement.setAttribute('aria-hidden', 'false');
+      modalElement.setAttribute('aria-modal', 'true');
+  }
+  }
+
+    closeModal(text:string) {
      
-      const modalElement = document.getElementById('myModal');
+      const modalElement = document.getElementById(text);
   if (modalElement) {
     modalElement.classList.remove('show');
     modalElement.style.display = 'none';
