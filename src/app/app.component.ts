@@ -58,6 +58,20 @@ public onAddNote(): void {
   
 }
 
+public deleteNote(id:any):void{
+  
+    this.wohngemeinschaftservice.deleteNote(id).subscribe(
+      (response: any) => {
+        this.getWohngemeinschaft();
+      },
+      (error) => {
+        console.error('Error deleting note:', error);
+      }
+    );
+    
+
+}
+
 
 
 
@@ -96,12 +110,7 @@ public onAddNote(): void {
 
   
    openModal() {
-    /**const modelDiv=document.getElementById('myModel');
-    if(modelDiv!=null){
-      modelDiv.style.display='none';
-
-    }*/
-    //$('#myModal').modal('show');
+    
     const modalElement = document.getElementById('myModal');
   if (modalElement) {
     modalElement.classList.add('show');
@@ -110,12 +119,7 @@ public onAddNote(): void {
   }
 
     closeModal() {
-      /**const modelDiv=document.getElementById('myModel');
-      if(modelDiv!=null){
-        modelDiv.style.display='none';
-  
-      }*/
-      //$('#myModal').modal('hide');
+     
       const modalElement = document.getElementById('myModal');
   if (modalElement) {
     modalElement.classList.remove('show');
