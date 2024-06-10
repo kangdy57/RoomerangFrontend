@@ -1,3 +1,5 @@
+import { ɵExtraLocaleDataIndex } from "@angular/core";
+
 export interface Note {
     author:RoomMate;
     text:string;
@@ -12,3 +14,4 @@ export interface Note {
     roommates: RoomMate[],
     notes: Note[]
   }
+  

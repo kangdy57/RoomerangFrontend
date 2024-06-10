@@ -1,19 +1,54 @@
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-    
-  </h1>
-  
 
-  <div>{{wohngemeinschaft.name}}</div></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roommate Home</title>
 
-
-  <div *ngIf ="wohngemeinschaft">
+</head>
+<body>
+<div class="header">
+  <div class="logo">
+    <img src="assets/Logo.png" alt="Logo" >
+  </div>
+  <div class="search-bar">
+    <input type="text" placeholder="Add task or Search" width="100">
+    <img src="assets/search.jpeg" height="30" >
+  </div>
+  <div class="icons">
+    <img src="assets/bell.jpeg" alt="Notifications">
+    <img src="assets/gear.jpeg" alt="Settings">
+    <img src="assets/User.jpg" >
+  </div>
+</div>
+<div class="sidebar">
+  <img src="assets/Calendar.png" alt="Calendar" >
+  <img src="assets/Calendar.png" alt="Calendar" >
+  <img src="assets/Calendar.png" alt="Calendar" >
+  <img src="assets/Calendar.png" alt="Calendar" >
+</div>
+<div class="main-content">
+  <div class="navbar">
+    <div>Home</div>
+    <div>Chores</div>
+    <div>Messages</div>
+    <div>Roommate tasks</div>
+    <div>Expenses</div>
+    <div>Agreements</div>
+  </div>
+  <div class="updates">
+    <!--<div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">Roommate Gathering 2023<br>Join now for updates</div>
+    <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">Bring your pet home day is here!</div>
+    <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">New cleaning schedule</div>
+    <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">New cleaning schedule</div>-->
+    <div *ngIf ="wohngemeinschaft">
     
       
-      <div class="note-container_neu">
-        <h2>Notes</h2>
+      <div>
+        
         <div class="note-grid">
+          <div class="buttonadd"  id="main-container"><button type="button" class="btn-primary" (click)="  openModal('myModal')">
+            Notiz hinzufügen
+          </button></div>
           <div *ngFor="let note of wohngemeinschaft.notes" class="note-card">
             <h3 class="note-title">{{ note.author.name }}: </h3>
             
@@ -24,12 +59,141 @@
             </div>
           </div>
         </div>
-        <div class="container"  id="main-container"><button type="button" class="btn-primary" (click)="  openModal('myModal')">
-          Notiz hinzufügen
-        </button></div>
+        
       </div>
     
     </div>
+
+
+  </div>
+  <div class="section">
+    <div class="title">Meetings</div>
+    <div class="content">
+      <div class="box calendar"><div class="month">
+        <ul>
+          <li class="prev">&#10094;</li>
+          <li class="next">&#10095;</li>
+          <li>Juni<br><span style="font-size:18px">2024</span></li>
+        </ul>
+      </div>
+
+        <ul class="weekdays">
+          <li>Mo</li>
+          <li>Tu</li>
+          <li>We</li>
+          <li>Th</li>
+          <li>Fr</li>
+          <li>Sa</li>
+          <li>Su</li>
+        </ul>
+
+        <ul class="days">
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+          <li>6</li>
+          <li>7</li>
+          <li>8</li>
+          <li>9</li>
+          <li>10</li>
+          <li><span class="active">11</span></li>
+          <li>12</li>
+          <li>13</li>
+          <li>14</li>
+        </ul></div>
+      <div class="box applications">
+        <div class="app">My profile</div>
+        <div class="app">Reminders</div>
+        <div class="app">Tasks</div>
+        <div class="app">Calendar</div>
+        <div class="app">Messages</div>
+        <div class="app">Notifications</div>
+        <div class="app">Lists</div>
+      </div>
+      <div class="box roommates">
+        
+          
+          <div *ngFor="let roommate of wohngemeinschaft.roommates" class="roommate">
+            <div class="roommate" ><div><img src="assets/User.jpg"  class="roommatetext"  ></div>{{ roommate.name }}<br>Contact Info</div>
+            
+            
+            
+            
+          </div>
+        
+
+        
+
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="title">Household</div>
+    <div class="content">
+      <div class="box">Shared Events
+        <div class="Boxinnen">Internet 40$</div><br>
+        <div class="Boxinnen">Wasser 30$</div><br>
+        <div class="Boxinnen">Gas 80$</div><br>
+        <div class="Boxinnen">Bier 200$</div><br>
+        <div class="Boxinnen">Geschenk Torsten 20$</div>
+      </div>
+
+      <div class="box">Bills
+        <div class="Boxinnen">Internet 40$</div><br>
+        <div class="Boxinnen">Wasser 30$</div><br>
+        <div class="Boxinnen">Gas 80$</div><br>
+        <div class="Boxinnen">Bier 200$</div><br>
+        <div class="Boxinnen">Geschenk Torsten 20$</div>
+      </div>
+      
+      <div class="box">Putzplan
+        
+      <div>Küche</div>
+
+      <div>Bad</div>
+      </div>
+      
+        
+
+
+
+      <div class="box">Grocery List
+        <div class="Boxinnen">Internet 40$</div><br>
+        <div class="Boxinnen">Wasser 30$</div><br>
+        <div class="Boxinnen">Gas 80$</div><br>
+        <div class="Boxinnen">Bier 200$</div><br>
+        <div class="Boxinnen">Geschenk Torsten 20$</div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="title">Shared Activities
+
+    </div>
+    <div class="shared-activities">
+      <div class="activity" ><img src="assets/pets.jpg" height="200" width="383s">Dinner Party   <br>  -Am 18.10.2024</div>
+      <div class="activity"><img src="assets/pets.jpg" height="200" width="383s">Game Night     <br>  -Am 01.07.2024</div>
+      <div class="activity"><img src="assets/pets.jpg" height="200" width="383s">Yoga Session   <br>  -Am 05.09.2024</div>
+      <div class="activity"><img src="assets/pets.jpg" height="200" width="383s">Yoga Session   <br>  -Am 05.09.2024</div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="title">Shared Documents</div>
+    <div class="shared-documents">
+      <div class="document">House Rules</div>
+      <div class="document">Registration Form</div>
+      <div class="document">Benefits Brochure</div>
+      <div class="document">Account Setup Guide</div>
+    </div>
+  </div>
+</div>
+</body>
+
+
+
+
+
       
         <!--<button (click)="addNote()">Add New Note</button>-->
 
@@ -121,7 +285,7 @@
 
 
 
-<app-note></app-note>
+
       
       
       
