@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { baseURL } from '../models/constants';
-import { Wohngemeinschaft } from '../models/wg';
+import { Wohngemeinschaft } from '../models/wohngemeinschaft.model';
 import { Observable } from 'rxjs';
 
 
@@ -13,6 +13,6 @@ export class WohngemeinschaftService {
   constructor(private http: HttpClient) { }
 
   getWohngemeinschaft(): Observable<Wohngemeinschaft[]>  {
-    return this.http.get<Wohngemeinschaft[]>(baseURL + 'wg');
+    return this.http.get<Wohngemeinschaft[]>(baseURL + 'note');
   }
 }

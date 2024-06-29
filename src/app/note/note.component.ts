@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Note } from '../models/wg';
+import { Note } from '../models/wohngemeinschaft.model';
 
 @Component({
   selector: 'app-note',

@@ -1,27 +1,26 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Note, Wohngemeinschaft } from './models/wg';
-import { WohngemeinschaftService } from './wohngemeinschaft/wohngemeinschaft.service';
-import { NgForm } from '@angular/forms';
+// app.component.ts
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-//declare var $: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
-
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  
-  public wohngemeinschaft = [];
-  public title = 'RoomerangFrontend';
+export class AppComponent implements OnInit {
+  roommates: any[] = [];
 
-  constructor(private wohngemeinschaftservice: WohngemeinschaftService){}
 
-  ngOnInit() {
-    this.wohngemeinschaftservice.getWohngemeinschaft()
-        .subscribe(data => this.wohngemeinschaft = data);
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+  }
+
+  navigateToNotes($myParam: string = ''): void {
+    const naviagtionDetails: String[] = ['/notes'];
+    if($myParam.length) {
+      naviagtionDetails.push($myParam);
+    }
+    this.router.navigate(naviagtionDetails);
   }
 }
-
-

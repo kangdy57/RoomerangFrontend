@@ -1,28 +1,26 @@
+// app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from  '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NoteComponent } from './note/note.component';
-import { RoomMateComponent } from './room-mate/room-mate.component';
-import { WohngemeinschaftComponent } from './wohngemeinschaft/wohngemeinschaft.component';
 import { FormsModule } from '@angular/forms';
-import { WohngemeinschaftService } from './wohngemeinschaft/wohngemeinschaft.service';
-
-
+import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    AppComponent,
     NoteComponent,
-    RoomMateComponent,
-    WohngemeinschaftComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule,
+    RouterModule
   ],
-  providers: [WohngemeinschaftService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
