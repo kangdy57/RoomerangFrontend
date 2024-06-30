@@ -9,9 +9,20 @@ export interface Note {
     name: string,
     wohngemeinschaft: Wohngemeinschaft
   }
+
+  export interface Putzplan {
+    kueche: RoomMate,
+    bad: RoomMate,
+    validFrom: string,
+    validTo: string
+  }
+
+
+
   export interface Wohngemeinschaft{
     name: string,
     roommates: RoomMate[],
-    notes: Note[]
+    notes: Note[],
+    putzplan: Putzplan
   }
   

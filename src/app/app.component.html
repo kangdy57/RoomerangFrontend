@@ -55,7 +55,9 @@
             <p class="note-content">{{ note.text }}</p>
             <div class="note-actions">
               <button (click)="openModalEdit(note,note.text)">Edit</button>
+              <button (click)="openDeleteModal(note.id)">DELETE</button>
               <button (click)="deleteNote(note.id)">Delete</button>
+
             </div>
           </div>
         </div>
@@ -122,6 +124,13 @@
             
             
           </div>
+          
+
+          <div class="roommate-button"  id="main-container"><button type="roommate-button"(click)="  openModal('RoommateModal')">
+           <div class="roommates">Add Rommate</div>
+          </button></div>
+
+
         
 
         
@@ -147,13 +156,32 @@
         <div class="Boxinnen">Bier 200$</div><br>
         <div class="Boxinnen">Geschenk Torsten 20$</div>
       </div>
-      
+
+     
       <div class="box">Putzplan
         
-      <div>Küche</div>
+      <div>Küche:</div>
+      <p>{{wohngemeinschaft.putzplan.kueche.name}}</p>
 
-      <div>Bad</div>
+      <div>Bad:</div>
+      <p>{{wohngemeinschaft.putzplan.bad.name}}</p>
+
+      <div>valid from:</div>
+      <p>{{wohngemeinschaft.putzplan.validFrom}}</p>
+
+      <div>valid to:</div>
+      <p>{{wohngemeinschaft.putzplan.validTo}}</p>
+
+
+      <button type="button" class="btn btn-secondary" (click)="updatePutzplan()">Update Putzplan</button>
+
+
+
       </div>
+
+
+
+
       
         
 
@@ -246,6 +274,56 @@
   </div>
 </div> 
 
+<!-- add Roommatedodal  -->
+<div class="modal" id="RoommateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Roomate</h5>
+        <button type="button" class="close" (click)="closeModal('RoommateModal')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+          
+        <div class="modal-body">
+          <div>
+            <label for="noteTitle">name:</label><br>
+            <input type="text" id="noteAuthor" [(ngModel)]="name" name="name" style="width: 100%; margin-bottom: 10px;"><br>
+           
+          
+        </div>
+      
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal('RoommateModal')">Close</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('RoommateModal');onAddNote()">Add</button>
+      </div>
+    </div>
+  </div>
+</div> 
+</div>
+
+
+<!-- deleteNoteModal  -->
+<div class="modal" id="deleteNoteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Soll die Notiz wirklich gelöscht werden?</h5>
+        <button type="button" class="close" (click)="closeModal('deleteNoteModal')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal('deleteNoteModal')">Nein</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('deleteNoteModal');deleteNote(noteid)">Ja</button>
+      </div>
+    </div>
+  </div>
+</div> 
 
 <!-- Edit Note Modal -->
 <div class="modal" id="editNoteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="editNoteModalLabel" aria-hidden="true">
@@ -276,6 +354,8 @@
     </div>
   </div>
 </div>
+
+
 
 
 

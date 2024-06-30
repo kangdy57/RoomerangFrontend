@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Note, Wohngemeinschaft } from './models/notes';
 import { wohngemeinschaftService } from './wohngemeinschaft/wohngemeinschaft.service';
 import * as $ from 'jquery';
@@ -14,13 +14,14 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent implements OnInit{
   public wohngemeinschaft: Wohngemeinschaft;
+  noteid: any=0;
   name: string = '';
   text: string = '';
   updatetext:string='hallo';
   id:any;
-  selectednote:Note = { id: 0, author: { wohngemeinschaft:{name:'',notes:[],roommates:[]},name: '' }, text: '' };
+  selectednote:Note = { id: 0, author: { wohngemeinschaft:{name:'',notes:[],roommates:[],putzplan:{kueche:null,bad:null,validFrom:'',validTo:''}},name: '' }, text: '' };
 
-  constructor(private wohngemeinschaftservice: wohngemeinschaftService){}
+  constructor(private wohngemeinschaftservice: wohngemeinschaftService,private cdr: ChangeDetectorRef){}
 
   ngOnInit() {
     this.getWohngemeinschaft();
@@ -33,6 +34,7 @@ export class AppComponent implements OnInit{
         this.selectednote=null;
         this.wohngemeinschaft=response;
         console.log(this.wohngemeinschaft);
+        this.cdr.detectChanges();
       },
       (error: HttpErrorResponse)=>{
         alert(error.message);
@@ -52,6 +54,7 @@ public onAddNote(): void {
         this.getWohngemeinschaft();
       },
       (error) => {
+        this.getWohngemeinschaft();
         console.error('Error adding note:', error);
       }
     );
@@ -65,13 +68,22 @@ public onAddNote(): void {
 public deleteNote(id:any):void{
   
     this.wohngemeinschaftservice.deleteNote(id).subscribe(
+    
+
+      
       (response: any) => {
-        this.getWohngemeinschaft();
-      },
+        
+          this.getWohngemeinschaft();
+
+        
+      }),
       (error) => {
+        this.getWohngemeinschaft();
         console.error('Error deleting note:', error);
       }
-    );
+    ;
+
+    this.getWohngemeinschaft();
     
 
 }
@@ -83,11 +95,16 @@ public editNote():void{
       this.getWohngemeinschaft();
     },
     (error) => {
+      this.getWohngemeinschaft();
       console.error('Error editing note:', error);
     }
   );
   
 
+}
+
+public updatePutzplan(): void{
+  this.wohngemeinschaftservice.updatePutzplan();
 }
 
 
@@ -130,6 +147,20 @@ public editNote():void{
    openModal(text:string) {
     
     const modalElement = document.getElementById(text);
+  if (modalElement&& !modalElement.classList.contains('show')) {
+    modalElement.classList.add('show');
+    modalElement.style.display = 'block';
+    modalElement.setAttribute('aria-hidden', 'false');
+      modalElement.setAttribute('aria-modal', 'true');
+  }
+  }
+
+  openDeleteModal(note:Note) {
+    
+  
+    this.noteid=note.id;
+    
+    const modalElement = document.getElementById('deleteNoteModal');
   if (modalElement&& !modalElement.classList.contains('show')) {
     modalElement.classList.add('show');
     modalElement.style.display = 'block';

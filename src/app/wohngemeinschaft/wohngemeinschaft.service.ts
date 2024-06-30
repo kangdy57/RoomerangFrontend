@@ -45,13 +45,17 @@ export class wohngemeinschaftService{
         return this.http.post<Wohngemeinschaft>(`${this.apiServerUrl}/updateWG`, wohngemeinschaft)
     }
 
-    public deleteNote(id:any): Observable<any>{
+    public updatePutzplan(): any{
+        return this.http.get<string>(`${this.apiServerUrl}/newPutzplan`)
+    }
+
+    public deleteNote(id:any, options?: any): Observable<any>{
         const formData = new FormData();
         formData.append('noteId', id);
         
 
 
-        return this.http.post<string>(`${this.apiServerUrl}/roomerang/deleteNote`, formData);
+        return this.http.post<string>(`${this.apiServerUrl}/roomerang/deleteNote`,formData);
     }
 
 
