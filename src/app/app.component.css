@@ -73,6 +73,10 @@
   .note-actions button:hover {
     background-color: #455e34;
   }
+
+  .eddel-button{
+    color: white;
+  }
   
   button {
     margin-top: 10px;
@@ -112,7 +116,7 @@
   }
   
   .close {
-    color: #aaa;
+    color: #f0eded;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -260,6 +264,7 @@
   
   .applications, .roommates {
     width: 48%;
+    color: white;
   
   }
   

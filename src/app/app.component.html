@@ -54,9 +54,9 @@
             
             <p class="note-content">{{ note.text }}</p>
             <div class="note-actions">
-              <button (click)="openModalEdit(note,note.text)">Edit</button>
-              <button (click)="openDeleteModal(note.id)">DELETE</button>
-              <button (click)="deleteNote(note.id)">Delete</button>
+              <button class="eddel-button" (click)="openModalEdit(note,note.text)">Edit</button>
+              <button  class="eddel-button" (click)="openDeleteModal(note.id)">Löschen</button>
+              
 
             </div>
           </div>
@@ -105,6 +105,8 @@
           <li>13</li>
           <li>14</li>
         </ul></div>
+
+        <!--
       <div class="box applications">
         <div class="app">My profile</div>
         <div class="app">Reminders</div>
@@ -113,7 +115,9 @@
         <div class="app">Messages</div>
         <div class="app">Notifications</div>
         <div class="app">Lists</div>
-      </div>
+      </div>-->
+
+
       <div class="box roommates">
         
           
@@ -128,7 +132,14 @@
 
           <div class="roommate-button"  id="main-container"><button type="roommate-button"(click)="  openModal('RoommateModal')">
            <div class="roommates">Add Rommate</div>
-          </button></div>
+          </button>
+          <button type="roommate-button"(click)="  openModal('deleteRoommateModal')">
+            <div class="roommates">Bewohner löschen</div>
+           </button>
+        
+        </div>
+
+      
 
 
         
@@ -137,24 +148,37 @@
 
       </div>
     </div>
+<!--experiment-->
+
+ 
+
+    <!--Ende experiment-->
+
   </div>
   <div class="section">
     <div class="title">Household</div>
     <div class="content">
-      <div class="box">Shared Events
-        <div class="Boxinnen">Internet 40$</div><br>
-        <div class="Boxinnen">Wasser 30$</div><br>
-        <div class="Boxinnen">Gas 80$</div><br>
-        <div class="Boxinnen">Bier 200$</div><br>
-        <div class="Boxinnen">Geschenk Torsten 20$</div>
-      </div>
+      
 
       <div class="box">Bills
-        <div class="Boxinnen">Internet 40$</div><br>
-        <div class="Boxinnen">Wasser 30$</div><br>
-        <div class="Boxinnen">Gas 80$</div><br>
-        <div class="Boxinnen">Bier 200$</div><br>
-        <div class="Boxinnen">Geschenk Torsten 20$</div>
+        <div class="buttonadd"  id="main-container"><button type="button" class="btn-primary" (click)="  openModal('ausgabeModal')">
+          Ausgabe hinzufügen
+        </button></div>
+        <div *ngFor="let ausgabe of wohngemeinschaft.ausgaben" class="note-card">
+          <h3 class="note-title">{{ ausgabe.description }}: </h3>
+          
+          <p class="note-content">Kosten: {{ ausgabe.amount }} €</p>
+          
+          <p class="note-content">Bewohner: {{ ausgabe.resident.name}}</p>
+
+          <div class="note-actions">
+            
+            <button  class="eddel-button" (click)="openDeleteModal(note.id)">Löschen</button>
+            
+
+          </div>
+        </div>
+       
       </div>
 
      
@@ -187,18 +211,18 @@
 
 
 
-      <div class="box">Grocery List
-        <div class="Boxinnen">Internet 40$</div><br>
-        <div class="Boxinnen">Wasser 30$</div><br>
-        <div class="Boxinnen">Gas 80$</div><br>
-        <div class="Boxinnen">Bier 200$</div><br>
-        <div class="Boxinnen">Geschenk Torsten 20$</div></div>
+      
+
+
+
     </div>
   </div>
+  <!--
   <div class="section">
     <div class="title">Shared Activities
 
     </div>
+    
     <div class="shared-activities">
       <div class="activity" ><img src="assets/pets.jpg" height="200" width="383s">Dinner Party   <br>  -Am 18.10.2024</div>
       <div class="activity"><img src="assets/pets.jpg" height="200" width="383s">Game Night     <br>  -Am 01.07.2024</div>
@@ -214,7 +238,7 @@
       <div class="document">Benefits Brochure</div>
       <div class="document">Account Setup Guide</div>
     </div>
-  </div>
+  </div>-->
 </div>
 </body>
 
@@ -257,9 +281,14 @@
           
         <div class="modal-body">
           <div>
-            <label for="noteTitle">Roommate:</label><br>
-            <input type="text" id="noteAuthor" [(ngModel)]="name" name="name" style="width: 100%; margin-bottom: 10px;"><br>
-            <label for="noteContent">Content:</label><br>
+          
+            <div>
+              <label for="noteSelect">Mitbewohner:</label>
+              <select id="noteSelect" [(ngModel)]="name" name="noteSelect">
+                <option *ngFor="let roommate of wohngemeinschaft.roommates" [value]="roommate.name">{{ roommate.name }}</option>
+              </select>
+            </div>
+            <label for="noteContent">Inhalt:</label><br>
             <textarea id="noteContent"[(ngModel)]="text" name="text" style="width: 100%; height: 200px;"></textarea>
           </div>
           
@@ -269,6 +298,45 @@
       <div class="modal-footer">
        <button type="button" class="btn btn-secondary" (click)="closeModal('myModal')">Close</button>
         <button type= "submit" class="btn btn-primary"(click)="closeModal('myModal');onAddNote()">Add</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- add AusgabeModal  -->
+<div class="modal" id="ausgabeModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Ausgabe</h5>
+        <button type="button" class="close" (click)="closeModal('ausgabeModal')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+          
+        <div class="modal-body">
+          <div>
+            <p>Roommate :</p>
+            <select id="noteSelect" [(ngModel)]="name" name="noteSelect">
+              <option *ngFor="let roommate of wohngemeinschaft.roommates" [value]="roommate.name">{{ roommate.name }}</option>
+            </select>
+
+            <p>Preis in Euro:</p>
+          
+            <input id="preis"  name="preis" />
+            <br>
+            <label for="noteContent">Beschreibung:</label><br>
+            <textarea id="noteContent"[(ngModel)]="text" name="text" style="width: 100%; height: 200px;"></textarea>
+          </div>
+          
+        </div>
+      
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal('ausgabeModal')">Close</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('ausgabeModal');onAddNote()">Add</button>
       </div>
     </div>
   </div>
@@ -298,7 +366,7 @@
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-secondary" (click)="closeModal('RoommateModal')">Close</button>
-        <button type= "submit" class="btn btn-primary"(click)="closeModal('RoommateModal');onAddNote()">Add</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('RoommateModal');onAddRoommate()">Add</button>
       </div>
     </div>
   </div>
@@ -320,6 +388,25 @@
       <div class="modal-footer">
        <button type="button" class="btn btn-secondary" (click)="closeModal('deleteNoteModal')">Nein</button>
         <button type= "submit" class="btn btn-primary"(click)="closeModal('deleteNoteModal');deleteNote(noteid)">Ja</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- deleteRoommmateModal  -->
+<div class="modal" id="deleteRoommateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div>
+        <label for="noteSelect">Mitbewohner:</label>
+        <select id="noteSelect" [(ngModel)]="roommateid" name="noteSelect">
+          <option *ngFor="let roommate of wohngemeinschaft.roommates" [value]="roommate.id">{{ roommate.name }}</option>
+        </select>
+      </div>
+      
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal('deleteRoommateModal')">Schließen</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('deleteRoommateModal');deleteRoommate()">Löschen</button>
       </div>
     </div>
   </div>

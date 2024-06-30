@@ -17,9 +17,10 @@ export class AppComponent implements OnInit{
   noteid: any=0;
   name: string = '';
   text: string = '';
+  roommateid: any=0;
   updatetext:string='hallo';
   id:any;
-  selectednote:Note = { id: 0, author: { wohngemeinschaft:{name:'',notes:[],roommates:[],putzplan:{kueche:null,bad:null,validFrom:'',validTo:''}},name: '' }, text: '' };
+  selectednote:Note = { id: 0, author: { wohngemeinschaft:{name:'',ausgaben:[],notes:[],roommates:[],putzplan:{kueche:null,bad:null,validFrom:'',validTo:''}},name: '' }, text: '' };
 
   constructor(private wohngemeinschaftservice: wohngemeinschaftService,private cdr: ChangeDetectorRef){}
 
@@ -65,10 +66,47 @@ public onAddNote(): void {
   
 }
 
+public onAddRoommate(): void {
+  
+    this.wohngemeinschaftservice.addRoommate(this.name).subscribe(
+      (response: any) => {
+        
+        this.closeModal('RoommateModal'); // Close the modal after adding the note
+        this.getWohngemeinschaft();
+      },
+      (error) => {
+        this.getWohngemeinschaft();
+        console.error('Error adding roommate:', error);
+      }
+    );
+
+  
+  
+}
+
+
+public deleteRoommate(): void {
+  
+  this.wohngemeinschaftservice.deleteRoommate(this.roommateid).subscribe(
+    (response: any) => {
+      
+      this.closeModal('RoommateModal'); // Close the modal after adding the note
+      this.getWohngemeinschaft();
+    },
+    (error) => {
+      this.getWohngemeinschaft();
+      console.error('Error adding roommate:', error);
+    }
+  );
+
+
+
+}
+
 public deleteNote(id:any):void{
   
     this.wohngemeinschaftservice.deleteNote(id).subscribe(
-    
+      
 
       
       (response: any) => {
@@ -76,11 +114,11 @@ public deleteNote(id:any):void{
           this.getWohngemeinschaft();
 
         
-      }),
+      },
       (error) => {
         this.getWohngemeinschaft();
         console.error('Error deleting note:', error);
-      }
+      })
     ;
 
     this.getWohngemeinschaft();
@@ -155,10 +193,10 @@ public updatePutzplan(): void{
   }
   }
 
-  openDeleteModal(note:Note) {
+  openDeleteModal(noteid:any) {
     
   
-    this.noteid=note.id;
+    this.noteid=noteid;
     
     const modalElement = document.getElementById('deleteNoteModal');
   if (modalElement&& !modalElement.classList.contains('show')) {

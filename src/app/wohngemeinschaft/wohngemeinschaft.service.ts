@@ -21,6 +21,18 @@ export class wohngemeinschaftService{
         return this.http.get<Wohngemeinschaft>(`${this.apiServerUrl}/roomerang/wg`)
     }
 
+    public addRoommate(name:string): Observable<any>{
+        const formData = new FormData();
+        formData.append('name', name);
+        return this.http.post<string>(`${this.apiServerUrl}/roomerang/addRoommate`, formData);
+    }
+
+    public deleteRoommate(roommateid:any): Observable<any>{
+        const formData = new FormData();
+        formData.append('roommateId', roommateid);
+        return this.http.post<string>(`${this.apiServerUrl}/roomerang/deleteRoommate`, formData);
+    }
+
  
         
     public addNotiz(name:string, text:string): Observable<any>{

@@ -16,6 +16,12 @@ export interface Note {
     validFrom: string,
     validTo: string
   }
+  export interface ausgabe {
+    id: any,
+    description: string,
+    amount: any,
+    transactiontime: string
+  }
 
 
 
@@ -23,6 +29,7 @@ export interface Note {
     name: string,
     roommates: RoomMate[],
     notes: Note[],
-    putzplan: Putzplan
+    putzplan: Putzplan,
+    ausgaben:ausgabe[]
   }
   
