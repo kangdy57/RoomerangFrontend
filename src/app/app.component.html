@@ -1,4 +1,3 @@
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,33 +7,30 @@
 <body>
 <div class="header">
   <div class="logo">
-    <img src="assets/Logo.png" alt="Logo" >
+    <img class="logo" src="assets/logo.png" alt="Logo"   >
+
   </div>
-  <div class="search-bar">
-    <input type="text" placeholder="Add task or Search" width="100">
-    <img src="assets/search.jpeg" height="30" >
-  </div>
+  <img class="logo-text" src="assets/Logotext.png" alt="Logotext"   >
   <div class="icons">
-    <img src="assets/bell.jpeg" alt="Notifications">
-    <img src="assets/gear.jpeg" alt="Settings">
-    <img src="assets/User.jpg" >
+    <img src="https://img.icons8.com/ios/50/bell.png" alt="Notifications">
+    <img src="https://img.icons8.com/carbon-copy/100/gear.png" alt="Settings">
+    <img src="https://img.icons8.com/ios/50/user--v1.png" >
   </div>
 </div>
 <div class="sidebar">
-  <img src="assets/Calendar.png" alt="Calendar" >
-  <img src="assets/Calendar.png" alt="Calendar" >
-  <img src="assets/Calendar.png" alt="Calendar" >
-  <img src="assets/Calendar.png" alt="Calendar" >
+  <img type="a" href="#section1" src="https://img.icons8.com/external-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto/64/external-calender-time-and-date-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto.png" alt="external-calender-time-and-date-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto" alt="Calendar" ><br>
+  <img src="https://img.icons8.com/ios/50/broom-with-a-lot-of-dust.png" alt="Calendar" ><br>
+  <img src="https://img.icons8.com/hatch/64/contact.png" alt="Calendar" ><br>
+  <img src="https://img.icons8.com/ios/50/file--v1.png" alt="Calendar" ><br>
 </div>
 <div class="main-content">
   <div class="navbar">
-    <div>Home</div>
-    <div>Chores</div>
-    <div>Messages</div>
-    <div>Roommate tasks</div>
-    <div>Expenses</div>
-    <div>Agreements</div>
+    <a class = "menü" href="#section1" >Home</a>
+    <a class = "menü" href="#section1" >Chores</a>
+    <a class = "menü" href="#section1" >Expenses</a>
+    <a class = "menü" href="#section1" >Agreements</a>
   </div>
+
   <div class="updates">
     <!--<div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">Roommate Gathering 2023<br>Join now for updates</div>
     <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">Bring your pet home day is here!</div>
@@ -43,189 +39,111 @@
     <div *ngIf ="wohngemeinschaft">
 
 
-      <!-- ausprobieren-->
-      <div>
-
-        <div class="note-grid">
-      
-            <img type="button" class="neuenotiz" (click)="  openModal('myModal')" src="https://img.icons8.com/ios/50/note.png" alt="external-calender-time-and-date-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto" alt="Calendar" >
-      
-          <div *ngFor="let note of wohngemeinschaft.notes" class="note-card">
-            <h3 class="note-title">{{ note.author.name }}: </h3>
-      
-            <p class="note-content">{{ note.text }}</p>
-            <div class="note-actions">
-              
-              <img type="button" class="neuenotiz" (click)="openModalEdit(note,note.text)" src="https://img.icons8.com/dotty/80/edit.png" alt="external-calender-time-and-date-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto" alt="Calendar" >
-      
-              <img type="button" class="neuenotiz" (click)="openDeleteModal(note.id)" src="https://img.icons8.com/ios/50/waste.png" alt="external-calender-time-and-date-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto" alt="Calendar" >
-      
-             
-      
-            </div>
-          </div>
-        </div>
-      
-      </div>
-      
-
-      <!-- ausprobieren-->
-
 
       <div>
-
-
-
-        
+        <p class="note-title">Notizen:</p>
         <div class="note-grid">
-          <div class="buttonadd"  id="main-container"><button type="button" class="btn-primary" (click)="  openModal('myModal')">
-            Notiz hinzufügen
-          </button></div>
-          <div *ngFor="let note of wohngemeinschaft.notes" class="note-card">
-            <h3 class="note-title">{{ note.author.name }}: </h3>
+
+            <img  class="hallo" (click)="  openModal('myModal')" src="https://img.icons8.com/ios/50/note.png" >
             
+          <div *ngFor="let note of wohngemeinschaft.notes" class="note-card">
+            <h3 class="note-title">{{ note.author.name }}: </h3>
             <p class="note-content">{{ note.text }}</p>
             <div class="note-actions">
-              <button class="eddel-button" (click)="openModalEdit(note,note.text)">Edit</button>
-              <button  class="eddel-button" (click)="openDeleteModal(note.id)">Löschen</button>
-              
-
+              <img type="button" class="buttonadd" (click)="openModalEdit(note,note.text)" src="https://img.icons8.com/dotty/80/edit.png"  >
+              <img type="button" class="buttonadd" (click)="openDeleteModal(note.id)" src="https://img.icons8.com/ios/50/waste.png"  >
             </div>
           </div>
         </div>
-        
+
       </div>
-    
+
     </div>
 
 
   </div>
   <div class="section">
-    <div class="title">Meetings</div>
+
     <div class="content">
-      <div class="box calendar"><div class="month">
-        <ul>
-          <li class="prev">&#10094;</li>
-          <li class="next">&#10095;</li>
-          <li>Juni<br><span style="font-size:18px">2024</span></li>
-        </ul>
+      <div class="box-calender">
+        <iframe src="https://8594274c58344748bf12940bfc88a35e.elf.site" style="border: 0; width: 100%; height: 100%;" frameborder="0" scrolling="no"></iframe>
       </div>
 
-        <ul class="weekdays">
-          <li>Mo</li>
-          <li>Tu</li>
-          <li>We</li>
-          <li>Th</li>
-          <li>Fr</li>
-          <li>Sa</li>
-          <li>Su</li>
-        </ul>
-
-        <ul class="days">
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-          <li>6</li>
-          <li>7</li>
-          <li>8</li>
-          <li>9</li>
-          <li>10</li>
-          <li><span class="active">11</span></li>
-          <li>12</li>
-          <li>13</li>
-          <li>14</li>
-        </ul></div>
-
-        <!--
-      <div class="box applications">
-        <div class="app">My profile</div>
-        <div class="app">Reminders</div>
-        <div class="app">Tasks</div>
-        <div class="app">Calendar</div>
-        <div class="app">Messages</div>
-        <div class="app">Notifications</div>
-        <div class="app">Lists</div>
-      </div>-->
-
-
+      
       <div class="box roommates">
         
-          
-          <div *ngFor="let roommate of wohngemeinschaft.roommates" class="roommate">
-            <div class="roommate" ><div><img src="assets/User.jpg"  class="roommatetext"  ></div>{{ roommate.name }}<br>{{ roommate.email}}<br>{{ roommate.telnr}}</div>
+
+
+          <div *ngFor="let roommate of wohngemeinschaft.roommates" class="">
+            <div class="roommate" >
+              <div class="user">
+                <img src="assets/{{roommate.name}}.png"  class="logo"   >
+                <div class="user">
+
+                  <h4><br>{{ roommate.name }}<br>{{ roommate.email }}<br>{{ roommate.telnr }}</h4>
+                  
+              </div>
             
             
-            
-            
+            </div>
+             
+
+            </div>
           </div>
-          
-
-          <div class="roommate-button"  id="main-container"><button type="roommate-button"(click)="  openModal('RoommateModal')">
-           <div class="roommates">Add Rommate</div>
-          </button>
-          <button type="roommate-button"(click)="  openModal('deleteRoommateModal')">
-            <div class="roommates">Bewohner löschen</div>
-           </button>
-        
-        </div>
-
-      
-
-
-        
-
-        
-
+        <div > <Button class="buttonroommate"(click)="  openModal('RoommateModal')">Neuer Mitbewohner</Button></div>
+        <div > <Button class="buttonroommate"(click)="  openModal('deleteRoommateModal')">Mitbewohner löschen</Button></div>
       </div>
     </div>
-<!--experiment-->
-
- 
-
-    <!--Ende experiment-->
-
   </div>
   <div class="section">
-    <div class="title">Household</div>
+    <div class="title">Haushalt :</div>
     <div class="content">
       
 
-      <div class="box">Bills
-        <div class="buttonadd"  id="main-container"><button type="button" class="btn-primary" (click)="  openModal('ausgabeModal')">
-          Ausgabe hinzufügen
-        </button></div>
-        <div *ngFor="let ausgabe of wohngemeinschaft.ausgaben" class="note-card">
-          <h3 class="note-title">{{ ausgabe.description }}: </h3>
-          
-          <p class="note-content">Kosten: {{ ausgabe.amount }} €</p>
-          
-          <p class="note-content">Bewohner: {{ ausgabe.resident.name}}</p>
+      <div class="box">
 
-          <div class="note-actions">
+        <div class="putz-plan">Ausgaben</div>
+        <h2 id="section1"></h2>
+        
+        <div class="note-grid">
+          
+          <div *ngFor="let ausgabe of wohngemeinschaft.ausgaben" class="note-cardedit">
+            <h3 class="note-title">{{ ausgabe.description }}: </h3>
             
-            <button  class="eddel-button" (click)="openDeletBillModal(ausgabe.id)">Löschen</button>
+            <p class="note-content">Kosten: {{ ausgabe.amount }} €</p>
             
-
-          </div>
+            <p class="note-content">Bewohner: {{ ausgabe.resident.name}}</p>
+  
+            <div class="note-actions">
+              
+              <button  class="btn btn-secondary" (click)="openDeletBillModal(ausgabe.id)">Löschen</button>
+              
+  
+            </div>
+          
+         
         </div>
+
+      </div>
        
+        <button type="button" class="btn btn-secondary" (click)="  openModal('ausgabeModal')">Ausgabe hinzufügen</button>
       </div>
 
-     
-      <div class="box">Putzplan
-        
-      <div>Küche:</div>
+
+      <div class="box">
+        <div class="putz-plan">Putzplan</div>
+        <h2 id="section1"></h2>
+
+      <div class="Boxinnen">Küche:</div>
       <p>{{wohngemeinschaft.putzplan.kueche.name}}</p>
 
-      <div>Bad:</div>
+      <div class="Boxinnen">Bad:</div>
       <p>{{wohngemeinschaft.putzplan.bad.name}}</p>
 
-      <div>valid from:</div>
+      <div class="Boxinnen">Start:</div>
       <p>{{wohngemeinschaft.putzplan.validFrom}}</p>
 
-      <div>valid to:</div>
+      <div class="Boxinnen">Ende:</div>
       <p>{{wohngemeinschaft.putzplan.validTo}}</p>
 
 
@@ -238,39 +156,32 @@
 
 
 
+
+
+
+
+
       
-        
-
-
-
-      
-
-
 
     </div>
   </div>
-  <!--
-  <div class="section">
-    <div class="title">Shared Activities
-
-    </div>
-    
-    <div class="shared-activities">
-      <div class="activity" ><img src="assets/pets.jpg" height="200" width="383s">Dinner Party   <br>  -Am 18.10.2024</div>
-      <div class="activity"><img src="assets/pets.jpg" height="200" width="383s">Game Night     <br>  -Am 01.07.2024</div>
-      <div class="activity"><img src="assets/pets.jpg" height="200" width="383s">Yoga Session   <br>  -Am 05.09.2024</div>
-      <div class="activity"><img src="assets/pets.jpg" height="200" width="383s">Yoga Session   <br>  -Am 05.09.2024</div>
-    </div>
-  </div>
+  
   <div class="section">
     <div class="title">Shared Documents</div>
     <div class="shared-documents">
-      <div class="document">House Rules</div>
+      <div class="document" id="section1">House Rules</div>
       <div class="document">Registration Form</div>
       <div class="document">Benefits Brochure</div>
       <div class="document">Account Setup Guide</div>
     </div>
-  </div>-->
+  </div>
+
+
+
+
+
+
+
 </div>
 </body>
 
@@ -279,13 +190,7 @@
 
 
       
-        <!--<button (click)="addNote()">Add New Note</button>-->
 
-        
-<!-- Button trigger modal 
-<div><button type="button" class="btn-primary" (click)="openModal()">
-  Notiz hinzufügen
-</button></div>-->
 
 
 
@@ -432,7 +337,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Soll die Notiz wirklich gelöscht werden?</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Soll die Ausgabe wirklich gelöscht werden?</h5>
         <button type="button" class="close" (click)="closeModal('deleteBillModal')" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -510,24 +415,4 @@
       
       
       
-      <!-- Modal 
-      <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-           <div class="modal-content">
-              <div class="modal-header">
-                 <h5 class="modal-title" id="deleteModelLabel">Delete Employee</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                 <span aria-hidden="true">&times;</span>
-                 </button>
-              </div>
-              <div class="modal-body">
-                 <p>Are you sure you want to delete employee ?</p>
-                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    
-                 </div>
-              </div>
-           </div>
-        </div>
-      </div>
-      </div>-->
+    
