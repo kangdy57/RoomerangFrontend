@@ -7,6 +7,8 @@ export interface Note {
   }
   export interface RoomMate {
     name: string,
+    email:string,
+    telnr:string,
     wohngemeinschaft: Wohngemeinschaft
   }
 
@@ -18,6 +20,7 @@ export interface Note {
   }
   export interface ausgabe {
     id: any,
+    resident:RoomMate,
     description: string,
     amount: any,
     transactiontime: string

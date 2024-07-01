@@ -41,9 +41,41 @@
     <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">New cleaning schedule</div>
     <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">New cleaning schedule</div>-->
     <div *ngIf ="wohngemeinschaft">
-    
-      
+
+
+      <!-- ausprobieren-->
       <div>
+
+        <div class="note-grid">
+      
+            <img type="button" class="neuenotiz" (click)="  openModal('myModal')" src="https://img.icons8.com/ios/50/note.png" alt="external-calender-time-and-date-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto" alt="Calendar" >
+      
+          <div *ngFor="let note of wohngemeinschaft.notes" class="note-card">
+            <h3 class="note-title">{{ note.author.name }}: </h3>
+      
+            <p class="note-content">{{ note.text }}</p>
+            <div class="note-actions">
+              
+              <img type="button" class="neuenotiz" (click)="openModalEdit(note,note.text)" src="https://img.icons8.com/dotty/80/edit.png" alt="external-calender-time-and-date-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto" alt="Calendar" >
+      
+              <img type="button" class="neuenotiz" (click)="openDeleteModal(note.id)" src="https://img.icons8.com/ios/50/waste.png" alt="external-calender-time-and-date-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto" alt="Calendar" >
+      
+             
+      
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      
+
+      <!-- ausprobieren-->
+
+
+      <div>
+
+
+
         
         <div class="note-grid">
           <div class="buttonadd"  id="main-container"><button type="button" class="btn-primary" (click)="  openModal('myModal')">
@@ -122,7 +154,7 @@
         
           
           <div *ngFor="let roommate of wohngemeinschaft.roommates" class="roommate">
-            <div class="roommate" ><div><img src="assets/User.jpg"  class="roommatetext"  ></div>{{ roommate.name }}<br>Contact Info</div>
+            <div class="roommate" ><div><img src="assets/User.jpg"  class="roommatetext"  ></div>{{ roommate.name }}<br>{{ roommate.email}}<br>{{ roommate.telnr}}</div>
             
             
             
@@ -173,7 +205,7 @@
 
           <div class="note-actions">
             
-            <button  class="eddel-button" (click)="openDeleteModal(note.id)">Löschen</button>
+            <button  class="eddel-button" (click)="openDeletBillModal(ausgabe.id)">Löschen</button>
             
 
           </div>
@@ -325,10 +357,10 @@
 
             <p>Preis in Euro:</p>
           
-            <input id="preis"  name="preis" />
+            <input id="preis" [(ngModel)]="amount"   amount="preis" />
             <br>
             <label for="noteContent">Beschreibung:</label><br>
-            <textarea id="noteContent"[(ngModel)]="text" name="text" style="width: 100%; height: 200px;"></textarea>
+            <textarea id="noteContent"[(ngModel)]="description" name="description" style="width: 100%; height: 200px;"></textarea>
           </div>
           
         </div>
@@ -336,7 +368,7 @@
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-secondary" (click)="closeModal('ausgabeModal')">Close</button>
-        <button type= "submit" class="btn btn-primary"(click)="closeModal('ausgabeModal');onAddNote()">Add</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('ausgabeModal');onAddAusgabe()">Add</button>
       </div>
     </div>
   </div>
@@ -359,8 +391,10 @@
           <div>
             <label for="noteTitle">name:</label><br>
             <input type="text" id="noteAuthor" [(ngModel)]="name" name="name" style="width: 100%; margin-bottom: 10px;"><br>
-           
-          
+            <label for="noteTitle">Email:</label><br>
+            <input type="text" id="noteAuthor" [(ngModel)]="email" name="email" style="width: 100%; margin-bottom: 10px;"><br>
+            <label for="noteTitle">Telefon Nummer:</label><br>
+            <input type="text" id="noteAuthor" [(ngModel)]="telnum" name="telnum" style="width: 100%; margin-bottom: 10px;"><br>
         </div>
       
       </div>
@@ -392,6 +426,26 @@
     </div>
   </div>
 </div> 
+
+<!-- deleteBillModal  -->
+<div class="modal" id="deleteBillModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Soll die Notiz wirklich gelöscht werden?</h5>
+        <button type="button" class="close" (click)="closeModal('deleteBillModal')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal('deleteBillModal')">Nein</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('deleteBillModal');deleteBill()">Ja</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
 
 <!-- deleteRoommmateModal  -->
 <div class="modal" id="deleteRoommateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

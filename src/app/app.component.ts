@@ -18,9 +18,14 @@ export class AppComponent implements OnInit{
   name: string = '';
   text: string = '';
   roommateid: any=0;
+  telnum: string='';
+  email: string=''
   updatetext:string='hallo';
+  billid: any=0;
   id:any;
-  selectednote:Note = { id: 0, author: { wohngemeinschaft:{name:'',ausgaben:[],notes:[],roommates:[],putzplan:{kueche:null,bad:null,validFrom:'',validTo:''}},name: '' }, text: '' };
+  amount:any=0;
+  description:string="";
+  selectednote:Note = { id: 0, author: { email:'',telnr:'',wohngemeinschaft:{name:'',ausgaben:[],notes:[],roommates:[],putzplan:{kueche:null,bad:null,validFrom:'',validTo:''}},name: '' }, text: '' };
 
   constructor(private wohngemeinschaftservice: wohngemeinschaftService,private cdr: ChangeDetectorRef){}
 
@@ -68,7 +73,7 @@ public onAddNote(): void {
 
 public onAddRoommate(): void {
   
-    this.wohngemeinschaftservice.addRoommate(this.name).subscribe(
+    this.wohngemeinschaftservice.addRoommate(this.name,this.email,this.telnum).subscribe(
       (response: any) => {
         
         this.closeModal('RoommateModal'); // Close the modal after adding the note
@@ -84,6 +89,24 @@ public onAddRoommate(): void {
   
 }
 
+public onAddAusgabe(): void {
+  
+  this.wohngemeinschaftservice.addAusgabe(this.name,this.amount,this.description).subscribe(
+    (response: any) => {
+      
+      this.closeModal('ausgabeModal'); // Close the modal after adding the note
+      this.getWohngemeinschaft();
+    },
+    (error) => {
+      this.getWohngemeinschaft();
+      console.error('Error adding roommate:', error);
+    }
+  );
+
+
+
+}
+
 
 public deleteRoommate(): void {
   
@@ -91,6 +114,24 @@ public deleteRoommate(): void {
     (response: any) => {
       
       this.closeModal('RoommateModal'); // Close the modal after adding the note
+      this.getWohngemeinschaft();
+    },
+    (error) => {
+      this.getWohngemeinschaft();
+      console.error('Error adding roommate:', error);
+    }
+  );
+
+
+
+}
+
+public deleteBill(): void {
+  
+  this.wohngemeinschaftservice.deleteBill(this.billid).subscribe(
+    (response: any) => {
+      
+      this.closeModal('deleteBillModal'); // Close the modal after adding the note
       this.getWohngemeinschaft();
     },
     (error) => {
@@ -142,7 +183,16 @@ public editNote():void{
 }
 
 public updatePutzplan(): void{
-  this.wohngemeinschaftservice.updatePutzplan();
+  this.wohngemeinschaftservice.updatePutzplan().subscribe(
+    (response: any) => {
+      this.getWohngemeinschaft();
+    },
+    (error) => {
+      this.getWohngemeinschaft();
+      console.error('Error editing note:', error);
+    }
+  );
+  ;
 }
 
 
@@ -199,6 +249,20 @@ public updatePutzplan(): void{
     this.noteid=noteid;
     
     const modalElement = document.getElementById('deleteNoteModal');
+  if (modalElement&& !modalElement.classList.contains('show')) {
+    modalElement.classList.add('show');
+    modalElement.style.display = 'block';
+    modalElement.setAttribute('aria-hidden', 'false');
+      modalElement.setAttribute('aria-modal', 'true');
+  }
+  }
+
+  openDeletBillModal(billid:any) {
+    
+  
+    this.billid=billid;
+    
+    const modalElement = document.getElementById('deleteBillModal');
   if (modalElement&& !modalElement.classList.contains('show')) {
     modalElement.classList.add('show');
     modalElement.style.display = 'block';
