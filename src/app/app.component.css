@@ -16,10 +16,35 @@
   text-align: center;
 }
 
+
+
+.note-actions img, .hallo {
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+/* Hover-Effekt für die Bilder im Button */
+.note-actions img:hover, .hallo:hover {
+  filter: brightness(70%);
+}
+
+
 .logo{
 
     max-width: 30%;
     max-height: 20%;
+    height: auto;
+    width: auto;
+
+
+}
+
+.logo-roommate{
+
+  max-width: 30%;
+  max-height: 20%;
+  height: 150px;
+  width: auto;
 
 
 }
