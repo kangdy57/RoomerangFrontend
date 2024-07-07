@@ -7,6 +7,523 @@
 <body>
 <div class="header">
   <div class="logo">
+    <img class="logo" src="assets/logo.png">
+
+
+
+  </div>
+  <img class="logo-text" src="assets/Logotext.png" alt="Logotext"   >
+  <div class="icons">
+    <img src="https://img.icons8.com/ios/50/bell.png" alt="Notifications">
+    <img src="https://img.icons8.com/carbon-copy/100/gear.png" alt="Settings"  (click)="  openModal('einstelungen')">
+    <img src="https://img.icons8.com/ios/50/user--v1.png"  (click)="  openModal('layer2')">
+  </div>
+</div>
+
+<div class="sidebar">
+  <img type="a" href="#section1" src="https://img.icons8.com/external-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto/64/external-calender-time-and-date-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto.png" alt="external-calender-time-and-date-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto" alt="Calendar" ><br>
+  <img src="https://img.icons8.com/ios/50/broom-with-a-lot-of-dust.png" alt="Calendar" ><br>
+  <img src="https://img.icons8.com/hatch/64/contact.png" alt="Calendar" ><br>
+  <img src="https://img.icons8.com/ios/50/file--v1.png" alt="Calendar" ><br>
+</div>
+
+
+<div class="main-content">
+  <div class="navbar">
+    <a class = "menü" href="#section1" >Kalender</a>
+    <a class = "menü" href="#section1" >Aufgaben</a>
+    <a class = "menü" href="#section1" >Ausgaben</a>
+    <a class = "menü" href="#section1" >Vereinbarungen</a>
+  </div>
+
+  <div class="updates">
+    <!--<div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">Roommate Gathering 2023<br>Join now for updates</div>
+    <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">Bring your pet home day is here!</div>
+    <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">New cleaning schedule</div>
+    <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">New cleaning schedule</div>-->
+    <div *ngIf ="wohngemeinschaft">
+
+
+
+      <div>
+        <div class="title">Notizen</div>
+        <div class="note-grid">
+
+
+            <div class="note-card">
+              <img  class="hallo" (click)="  openModal('myModal')" src="https://img.icons8.com/ios/50/note.png" >
+              <div > <Button class="buttonroommate"(click)="  openModal('myModal')">Notiz hinzufügen</Button></div>
+
+            </div>
+          <div *ngFor="let note of wohngemeinschaft.notes" class="note-card">
+            <h3 class="note-title">{{ note.author.name }}: </h3>
+            <p class="note-content">{{ note.text }}</p>
+            <div class="note-actions">
+              <img type="button" class="buttonadd" (click)="openModalEdit(note,note.text)" src="https://img.icons8.com/dotty/80/edit.png"  >
+              <img type="button" class="buttonadd" (click)="openDeleteModal(note.id)" src="https://img.icons8.com/ios/50/waste.png"  >
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+  <div class="section">
+
+    <div class="content">
+      <div class="box-calender">
+        <iframe src="https://8594274c58344748bf12940bfc88a35e.elf.site" style="border: 0; width: 100%; height: 100%;" frameborder="0" scrolling="no"></iframe>
+      </div>
+
+
+      <div class="box roommates">
+
+
+
+          <div *ngFor="let roommate of wohngemeinschaft.roommates" class="">
+            <div class="roommate" >
+              <div class="user">
+                <img src="assets/{{roommate.name}}.png"  class="logo-roommate"   >
+                <div class="user">
+
+                  <h4><br>{{ roommate.name }}<br>{{ roommate.email }}<br>{{ roommate.telnr }}</h4>
+
+              </div>
+
+
+            </div>
+
+
+            </div>
+          </div>
+
+          <div > <Button class="buttonroommate"(click)="  openModal('RoommateModal')">Neuer Mitbewohner</Button></div>
+        <div > <Button class="buttonroommate"(click)="  openModal('deleteRoommateModal')">Mitbewohner löschen</Button></div>
+
+          
+
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="title">Haushalt</div>
+    <div class="content">
+      <div class="box">
+        <div class="putz-plan">Ausgaben</div>
+        <h2 id="section1"></h2>
+        <div class="note-grid">
+          <div *ngFor="let ausgabe of wohngemeinschaft.ausgaben" class="note-cardedit">
+            <h3 class="note-title">{{ ausgabe.description }}: </h3>
+
+            <p class="note-content">Kosten: {{ ausgabe.amount }} €</p>
+
+            <p class="note-content">Bewohner: {{ ausgabe.resident.name}}</p>
+
+            <div class="note-actions">
+
+              <button  class="btn btn-secondary" (click)="openDeletBillModal(ausgabe.id)">Löschen</button>
+            </div>
+        </div>
+      </div>
+        <button type="button" class="btn btn-secondary" (click)="  openModal('ausgabeModal')">Ausgabe hinzufügen</button>
+      </div>
+      <div class="box">
+        <img width="100%" src="assets/WG.jpg">
+        <br><br>
+        <h4>Live Together</h4>
+      </div>
+
+
+      <div class="box">
+        <div class="putz-plan">Putzplan</div>
+        <h2 id="section1"></h2>
+
+      <div class="Boxinnen">Küche:</div>
+      <p>{{wohngemeinschaft.putzplan.kueche.name}}</p>
+
+      <div class="Boxinnen">Bad:</div>
+      <p>{{wohngemeinschaft.putzplan.bad.name}}</p>
+
+      <div class="Boxinnen">Start:</div>
+      <p>{{wohngemeinschaft.putzplan.validFrom}}</p>
+
+      <div class="Boxinnen">Ende:</div>
+      <p>{{wohngemeinschaft.putzplan.validTo}}</p>
+
+
+      <button type="button" class="btn btn-secondary" (click)="updatePutzplan()">Update Putzplan</button>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="section">
+    <div class="title">Dokumente</div>
+    <div class="shared-documents">
+      <div class="document" id="section1"><h5>Haus-Regeln</h5><br>
+      <button class="buttonroommate" onclick="window.open('Hausregeln.docx', '_blank')"  > Dokument Öffnen </button><br>
+        <br>
+        <div class="docuplode">
+        <p>Dokument hochladen</p>
+          <form action="/upload" method="post" enctype="multipart/form-data">
+        <input
+          type="file"
+          id="docpicker"
+          accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />    </form>
+      </div><button class="buttonroommate" type="submit">Upload</button>
+      </div>
+
+      <div class="document" id="section1"><h5>Account Setup Guide</h5><br>
+        <button class="buttonroommate" onclick="window.open('assets/Account.docx', '_blank')"  > Dokument Öffnen </button><br>
+        <br>
+        <div class="docuplode">
+          <p>Dokument hochladen</p>
+          <input
+            type="file"
+            id="docpicker"
+            accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+        </div><button class="buttonroommate" type="submit">Upload</button>
+      </div>
+
+      <div class="document" id="section1"><h5>Haus-Regeln</h5><br>
+        <button class="buttonroommate" onclick="window.open('assets/1.pdf', '_blank')"  > Dokument Öffnen </button><br><br>
+        <div class="docuplode">
+          <p>Dokument hochladen</p>
+          <input
+            type="file"
+            id="docpicker"
+            accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+        </div><button class="buttonroommate" type="submit">Upload</button>
+      </div>
+
+      <div class="document" id="section1"><h5>Haus-Regeln</h5><br>
+        <button class="buttonroommate" onclick="window.open('assets/Hausregeln.docx', '_blank')"  > Dokument Öffnen </button><br><br>
+        <div class="docuplode">
+          <p>Dokument hochladen</p>
+          <input
+            type="file"
+            id="docpicker"
+            accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+        </div><button class="buttonroommate" type="submit">Upload</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+</div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- add NotizModal  -->
+<div class="modal" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Notiz</h5>
+        <button type="button" class="close" (click)="closeModal('myModal')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="modal-body">
+          <div>
+
+            <div>
+              <label for="noteSelect">Mitbewohner:</label>
+              <select id="noteSelect" [(ngModel)]="name" name="noteSelect">
+                <option *ngFor="let roommate of wohngemeinschaft.roommates" [value]="roommate.name">{{ roommate.name }}</option>
+              </select>
+            </div>
+            <label for="noteContent">Inhalt:</label><br>
+            <textarea id="noteContent"[(ngModel)]="text" name="text" style="width: 100%; height: 200px;"></textarea>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal('myModal')">Schließen</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('myModal');onAddNote()">Hinzufügen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- add AusgabeModal  -->
+<div class="modal" id="ausgabeModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Ausgabe</h5>
+        <button type="button" class="close" (click)="closeModal('ausgabeModal')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="modal-body">
+          <div>
+            <p>Mitbewohner :</p>
+            <select id="noteSelect" [(ngModel)]="name" name="noteSelect">
+              <option *ngFor="let roommate of wohngemeinschaft.roommates" [value]="roommate.name">{{ roommate.name }}</option>
+            </select>
+
+            <p>Preis in Euro:</p>
+
+            <input id="preis" [(ngModel)]="amount"   amount="preis" />
+            <br>
+            <label for="noteContent">Beschreibung:</label><br>
+            <textarea id="noteContent"[(ngModel)]="description" name="description" style="width: 100%; height: 200px;"></textarea>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal('ausgabeModal')">Schließen</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('ausgabeModal');onAddAusgabe()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--lazer 2 modalle -->
+<div class="modal" id="layer2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div > <Button class="buttonroommate"(click)="  openModal('RoommateModal')">  Neuer Mitbewohner</Button></div>
+      <div > <Button class="buttonroommate"(click)="  openModal('deleteRoommateModal')">Mitbewohner löschen</Button></div>
+      <div class="modal-body">
+
+
+        <div class="modal-body">
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal('layer2')">Schließen</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Einstellungen 2 modalle -->
+<div class="modal" id="einstelungen" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="settingsModalLabel">Webseiten-Einstellungen</h5>
+        <button type="button" class="btn-close" id="closeSettingsModal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-group">
+          <h6>Allgemeine Einstellungen</h6>
+          <button class="btn btn-secondary" id="changeTheme">Theme ändern</button>
+          <button class="btn btn-secondary" id="updateProfile">Profil aktualisieren</button>
+        </div>
+        <div class="setting-group">
+          <h6>Benachrichtigungen</h6>
+          <button class="btn btn-secondary" id="manageNotifications">Benachrichtigungen verwalten</button>
+          <button class="btn btn-secondary" id="privacySettings">Datenschutz-Einstellungen</button>
+        </div>
+      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal('einstelungen')">Schließen</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- add Roommatedodal  -->
+<div class="modal" id="RoommateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Roomate</h5>
+        <button type="button" class="close" (click)="closeModal('RoommateModal')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="modal-body">
+          <div>
+            <label for="noteTitle">Name:</label><br>
+            <input type="text" id="noteAuthor" [(ngModel)]="name" name="name" style="width: 100%; margin-bottom: 10px;"><br>
+            <label for="noteTitle">Email:</label><br>
+            <input type="text" id="noteAuthor" [(ngModel)]="email" name="email" style="width: 100%; margin-bottom: 10px;"><br>
+            <label for="noteTitle">Telefon Nummer:</label><br>
+            <input type="text" id="noteAuthor" [(ngModel)]="telnum" name="telnum" style="width: 100%; margin-bottom: 10px;"><br>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal('RoommateModal')">Close</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('RoommateModal');onAddRoommate()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<!-- deleteNoteModal  -->
+<div class="modal" id="deleteNoteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Soll die Notiz wirklich gelöscht werden?</h5>
+        <button type="button" class="close" (click)="closeModal('deleteNoteModal')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal('deleteNoteModal')">Nein</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('deleteNoteModal');deleteNote(noteid)">Ja</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- deleteBillModal  -->
+<div class="modal" id="deleteBillModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Soll die Ausgabe wirklich gelöscht werden?</h5>
+        <button type="button" class="close" (click)="closeModal('deleteBillModal')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal('deleteBillModal')">Nein</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('deleteBillModal');deleteBill()">Ja</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- deleteRoommmateModal  -->
+<div class="modal" id="deleteRoommateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div>
+        <label for="noteSelect">Mitbewohner:</label>
+        <select id="noteSelect" [(ngModel)]="roommateid" name="noteSelect">
+          <option *ngFor="let roommate of wohngemeinschaft.roommates" [value]="roommate.id">{{ roommate.name }}</option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="closeModal('deleteRoommateModal')">Schließen</button>
+        <button type= "submit" class="btn btn-primary"(click)="closeModal('deleteRoommateModal');deleteRoommate()">Löschen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Note Modal -->
+<div class="modal" id="editNoteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="editNoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editNoteModalLabel">Notiz bearbeiten</h5>
+         <button type="button" class="close" (click)="closeModal('editNoteModal')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <div class="modal-body">
+
+          <div>
+            <label for="editNoteAuthor">Mitbewohner:</label><br>
+            <p>{{selectednote?.author?.name}}</p>
+            <label for="editNoteContent">Inhalt:</label><br>
+          <textarea id="editNoteContent" [(ngModel)]="updatetext" name="updatetext" class="form-control" style="width: 100%; height: 200px;"></textarea>
+          <!--  <textarea id="editNoteContent" [(ngModel)]="selectednote?.text" name="updatetext" class="form-control" style="width: 100%; height: 200px;"></textarea>-->
+
+          </div>
+
+      </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal('editNoteModal')">Schließen</button>
+        <button type="submit" class="btn btn-primary" (click)="closeModal('editNoteModal');editNote()">Speichern</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-----------------------------------                                                                                                         alte Version               ------------------------------------------------------>
+<!--
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roommate Home</title>
+
+</head>
+<body>
+<div class="header">
+  <div class="logo">
     <img class="logo" src="assets/logo.png" alt="Logo"   >
 
   </div>
@@ -35,10 +552,10 @@
   </div>
 
   <div class="updates">
-    <!--<div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">Roommate Gathering 2023<br>Join now for updates</div>
+    <--<div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">Roommate Gathering 2023<br>Join now for updates</div>
     <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">Bring your pet home day is here!</div>
     <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">New cleaning schedule</div>
-    <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">New cleaning schedule</div>-->
+    <div class="update-item"><img src="assets/pets.jpg" height="200" width="383s">New cleaning schedule</div>--
     <div *ngIf ="wohngemeinschaft">
 
 
@@ -210,7 +727,7 @@
 
 
 
-<!-- add NotizModal  -->
+<-- add NotizModal  --
 <div class="modal" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -247,7 +764,7 @@
   </div>
 </div> 
 
-<!-- add AusgabeModal  -->
+<-- add AusgabeModal  --
 <div class="modal" id="ausgabeModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -286,7 +803,7 @@
   </div>
 </div> 
 
-<!-- add Roommatedodal  -->
+<-- add Roommatedodal  --
 <div class="modal" id="RoommateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -320,7 +837,7 @@
 </div>
 
 
-<!-- deleteNoteModal  -->
+<-- deleteNoteModal  --
 <div class="modal" id="deleteNoteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -339,7 +856,7 @@
   </div>
 </div> 
 
-<!-- deleteBillModal  -->
+<-- deleteBillModal  --
 <div class="modal" id="deleteBillModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -359,7 +876,7 @@
 </div> 
 
 
-<!-- deleteRoommmateModal  -->
+<-- deleteRoommmateModal  --
 <div class="modal" id="deleteRoommateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -378,7 +895,7 @@
   </div>
 </div> 
 
-<!-- Edit Note Modal -->
+<!- Edit Note Modal --
 <div class="modal" id="editNoteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="editNoteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -395,7 +912,7 @@
             <p>{{selectednote?.author?.name}}</p>
             <label for="editNoteContent">Content:</label><br>
           <textarea id="editNoteContent" [(ngModel)]="updatetext" name="updatetext" class="form-control" style="width: 100%; height: 200px;"></textarea>
-          <!--  <textarea id="editNoteContent" [(ngModel)]="selectednote?.text" name="updatetext" class="form-control" style="width: 100%; height: 200px;"></textarea>-->
+          <--  <textarea id="editNoteContent" [(ngModel)]="selectednote?.text" name="updatetext" class="form-control" style="width: 100%; height: 200px;"></textarea>--
 
           </div>
     
@@ -406,7 +923,7 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
 
 
 
